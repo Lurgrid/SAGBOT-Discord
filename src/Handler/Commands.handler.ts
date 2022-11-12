@@ -43,18 +43,17 @@ export default async (client: BotClient): Promise<void> => {
             }
             guild_commands.set(cmd.guild, list);
         } else {
-            commands.push(cmd.data.toJSON());
+            commands.push(cmd.data.toJSON());   
         }
         await Table.addRow(cmd.name, "[✔️] Success");
     }
     for (const gcmd of guild_commands){
         try {
             await rest.put(Routes.applicationGuildCommands(client.bot.application.id, gcmd[0]),{ body: gcmd[1] });
-            console.log(Table.toString());
         } catch(error) {
             console.error(`\x1b[41m\x1b[4m*** An error occurred when sending command guild data to the REST API.\x1b[0m\n`);
             console.error(error);
-        }   
+        }
     }
     try {
         await rest.put(Routes.applicationCommands(client.bot.application.id),{ body: commands });
