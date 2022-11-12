@@ -1,1 +1,3 @@
 /node_modules
+/src/Configuration/client.json
+/dist/Configuration/client.json

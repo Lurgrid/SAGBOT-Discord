@@ -1,7 +1,7 @@
 {
   "name": "sagbot-discord",
   "version": "0.0.1",
-  "description": "A simple test of TS",
+  "description": "Discord bot",
   "main": "index.js",
   "type": "module",
   "scripts": {
@@ -11,18 +11,23 @@
   "author": "Lurgrid",
   "license": "SEE LICENSE IN 'LICENSE'",
   "dependencies": {
+    "@types/express": "^4.17.14",
+    "@types/glob": "^8.0.0",
     "@types/node": "^18.7.16",
-    "@types/node-fetch": "^2.6.2",
-    "node-fetch": "^3.2.10",
+    "@types/socket.io": "^3.0.2",
+    "ascii-table": "^0.0.9",
+    "discord.js": "^14.6.0",
+    "express": "^4.18.2",
+    "glob": "^8.0.3",
+    "socket.io": "^4.5.3",
     "typescript": "^4.8.3"
   },
-  "devDependencies": {},
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Lurgrid/TS-default.git"
+    "url": "git+https://github.com/Lurgrid/SAGBOT-Discord.git"
   },
   "bugs": {
-    "url": "https://github.com/Lurgrid/TS-default/issues"
+    "url": "https://github.com/Lurgrid/SAGBOT-Discord/issues"
   },
-  "homepage": "https://github.com/Lurgrid/TS-default#readme"
+  "homepage": "https://github.com/Lurgrid/SAGBOT-Discord#readme"
 }
