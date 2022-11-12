@@ -7,7 +7,7 @@ const { sync } = pkg;
 export class BotClient{
     config: ConfigFileClient;
     bot: Client | undefined;
-    cmd: Collection<String, String>;
+    cmd: Collection<string, string>;
 
     constructor(config: ConfigFileClient){
         this.config = config;

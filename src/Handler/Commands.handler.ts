@@ -4,6 +4,7 @@ import Ascii from "ascii-table";
 import pkg from "glob";
 const { sync } = pkg;
 import { REST, Routes, Events } from 'discord.js'
+import { statSync } from 'fs';
 
 export default async (client: BotClient): Promise<void> => {
     if (!client.bot || !client.bot.application || !client.bot.application.id) return;
@@ -67,7 +68,8 @@ export default async (client: BotClient): Promise<void> => {
         if (!interaction.isChatInputCommand()) return;
         const path = client.cmd.get(interaction.commandName);
         if (!path) return;
-        const cmd = (await import(path.toString())).default;
+        const stats = statSync(`./dist/${path.slice(2)}`);
+        const cmd = (await import(`${path}#${stats.mtimeMs}`)).default;
         try {
             cmd.run(client, interaction);
         } catch(error){
