@@ -17,10 +17,9 @@ export default async (client: BotClient): Promise<void> => {
     try {
         await rest.put(Routes.applicationCommands(client.bot.application.id),{ body: [] });
     } catch(error) {
-        console.error(`\x1b[41m\x1b[4m*** An error occurred when clearing command data to the REST API.\x1b[0m\n`);
-        console.error(error);
+        client.console.error(`\x1b[41m\x1b[4m*** An error occurred when clearing command data to the REST API.\x1b[0m\n`);
+        client.console.error(error);
     }
-
     for (const file of files){
         const path = file.replace("/dist", ".");
         const cmd = (await import(path)).default;
@@ -46,22 +45,22 @@ export default async (client: BotClient): Promise<void> => {
         } else {
             commands.push(cmd.data.toJSON());   
         }
-        await Table.addRow(cmd.name, "[✔️] Success");
+        await Table.addRow(cmd.data.name, "[✔️] Success");
     }
     for (const gcmd of guild_commands){
         try {
             await rest.put(Routes.applicationGuildCommands(client.bot.application.id, gcmd[0]),{ body: gcmd[1] });
         } catch(error) {
-            console.error(`\x1b[41m\x1b[4m*** An error occurred when sending command guild data to the REST API.\x1b[0m\n`);
-            console.error(error);
+            client.console.error(`\x1b[41m\x1b[4m*** An error occurred when sending command guild data to the REST API.\x1b[0m\n`);
+            client.console.error(error);
         }
     }
     try {
         await rest.put(Routes.applicationCommands(client.bot.application.id),{ body: commands });
-        console.log(Table.toString());
+        client.console.log("\n" + Table.toString());
     } catch(error) {
-        console.error(`\x1b[41m\x1b[4m*** An error occurred when sending command data to the REST API.\x1b[0m\n`);
-        console.error(error);
+        client.console.error(`\x1b[41m\x1b[4m*** An error occurred when sending command data to the REST API.\x1b[0m\n`);
+        client.console.error(error);
     }
 
     client.bot.on(Events.InteractionCreate, async interaction => {
@@ -71,10 +70,11 @@ export default async (client: BotClient): Promise<void> => {
         const stats = statSync(`./dist/${path.slice(2)}`);
         const cmd = (await import(`${path}#${stats.mtimeMs}`)).default;
         try {
-            cmd.run(client, interaction);
+            client.console.log(`The user ${interaction.user.tag} has executed the command \"${interaction.commandName}\".`)
+            await cmd.run(client, interaction);
         } catch(error){
-            console.error(`\x1b[41m\x1b[4m*** Error: An error occurred during the execution of the command '${interaction.commandName}'.\x1b[0m\n`);
-            console.error(error);
+            client.console.error(`\x1b[41m\x1b[4m*** Error: An error occurred during the execution of the command '${interaction.commandName}'.\x1b[0m\n`);
+            client.console.error(error);
         }
     })
 }

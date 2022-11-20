@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>SAGBOT - Panel</title>
+        <link rel="stylesheet" href="style.css">
+        <script defer type="module">
+            import { io } from "https://cdn.socket.io/4.3.2/socket.io.esm.min.js";
+            const socket = io();
+            socket.on("connect", () => {
+                console.log(socket.id);
+            });
+
+            socket.on("disconnect", () => {
+                console.log(socket.id);
+            });
+
+            socket.on("log", arg => {
+                const tag = document.createElement("span")
+                tag.innerHTML = arg.replaceAll("\n", "<br>")
+                const c= document.getElementById("console")
+                c.appendChild(tag)
+                c.scrollTop = c.scrollHeight;
+            })
+            socket.on("consolenb", nb => {
+                document.getElementById("consolenb").innerHTML = nb;
+            })
+            socket.on("guildnb", nb => {
+                document.getElementById("guildnb").innerHTML = nb;
+            })
+          </script>
+    </head>
+    <body>
+        <header>
+            <span>Number of Guilds: <span id="guildnb">Loading...</span></span>
+            <span>Number of Console Open: <span id="consolenb">Loading...</span></span>
+        </header>
+        <div id="console">
+        </div>
+    </body>
+</html>

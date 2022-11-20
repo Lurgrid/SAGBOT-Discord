@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+:root {
+    --main: #0D0D0D;
+    --second: #F6F6F5;
+    --third: #080808;
+    --four: #757A7A;
+    --five:  #dd02ff;    
+}
+
+body {
+    margin: 0;
+    background-color: var(--main);
+}
+
+#console {
+    background-color: var(--third);
+    border-radius: 1rem;
+    border-style: solid;
+    border-width: 3px;
+    border-color: var(--five);
+    width: 70%;
+    height: 70%;
+    position: absolute;
+    box-shadow: rgba(221, 2, 255, 0.4) -5px 5px, rgba(221, 2, 255, 0.3) -10px 10px, rgba(221, 2, 255, 0.2) -15px 15px, rgba(221, 2, 255, 0.1) -20px 20px, rgba(221, 2, 255, 0.05) -25px 25px;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    overflow-y: scroll;
+    overflow-wrap: break-word;
+    overflow-x: hidden;
+    scrollbar-width: none;
+}
+
+#console::-webkit-scrollbar {
+    display: none;
+}
+
+#console span {
+    color: var(--second);
+    margin: 0 0 1% 1%;
+    width: 100%;
+    font-family: "Ubuntu";
+    display: inline-block;
+    white-space: pre;
+}
+
+#console span:first-of-type {
+    margin-top: 1%;
+}
+
+header {
+    display: flex;
+    width: 70%;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    text-align: center;
+    margin: 0 auto 0 auto;
+}
+
+header > span {
+    padding: 1%;
+    background-color: var(--third);
+    color: var(--second);
+    margin: 2% 0;
+    border-radius: 1rem;
+    border-style: solid;
+    border-width: 1.5px;
+    border-color: var(--five);
+    font-family: "Ubuntu";
+    font-size: 110%;
+    box-shadow: rgba(221, 2, 255, 0.4) -5px 5px, rgba(221, 2, 255, 0.3) -10px 10px, rgba(221, 2, 255, 0.2) -15px 15px, rgba(221, 2, 255, 0.1) -20px 20px, rgba(221, 2, 255, 0.05) -25px 25px;
+}

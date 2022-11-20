@@ -25,11 +25,11 @@ export default async (client: BotClient): Promise<void> => {
             try {
                 event.run(client, ...args);
             } catch(error) {
-                console.error(`\x1b[41m\x1b[4m*** Error: An error occurred during the execution of the event '${event.name}'.\x1b[0m\n`);
-                console.error(error);
+                client.console.error(`\x1b[41m\x1b[4m*** Error: An error occurred during the execution of the event '${event.name}'.\x1b[0m\n`);
+                client.console.error(error);
             }
         });
         await Table.addRow(event.name, "[✔️] Success");
     }
-    console.log(Table.toString());
+    client.console.log("\n" + Table.toString());
 }
