@@ -44,7 +44,7 @@ export class BotClient{
             }
             await hdl(this);
         }
-        this.console.log(`\x1b[32m\x1b[4m${this.bot.user?.username}#${this.bot.user?.tag} is logged on to Discord.\x1b[0m\n`)
+        this.console.log(`\x1b[32m\x1b[4m${this.bot.user?.tag} is logged on to Discord.\x1b[0m\n`)
         this.server.emit("guildnb", this.bot.guilds.cache.size)
     }
 }

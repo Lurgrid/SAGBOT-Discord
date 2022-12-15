@@ -20,7 +20,7 @@ export default class Console {
     }
     log = async (message?: any, ...OptionalParams: any[]): Promise<void> => {
         const m = format(message, ...OptionalParams);
-        console.log(`${Dateformat()} ${m}`)
+        console.log(`${Dateformat()} ${m}\0`)
         const n = `${Dateformat()} ${m.replaceAll(/\x1b\[[0-9]{1,2}m/gim, "")}`
         this.client.server.emit("log", n)
 
@@ -31,7 +31,7 @@ export default class Console {
     }
     error = async (message?: any, ...OptionalParams: any[]): Promise<void> => {
         const m = format(message, ...OptionalParams);
-        console.error(`${Dateformat()} ${m}`)
+        console.error(`${Dateformat()} ${m}\0`)
         const n = `${Dateformat()} ${m.replaceAll(/\x1b\[[0-9]{1,2}m/gim, "")}`
         this.client.server.emit("error", n)
 
@@ -42,7 +42,7 @@ export default class Console {
     }
     warn = async (message?: any, ...OptionalParams: any[]): Promise<void> => {
         const m = format(message, ...OptionalParams);
-        console.warn(`${Dateformat()} ${m}`)
+        console.warn(`${Dateformat()} ${m}\0`)
         const n = `${Dateformat()} ${m.replaceAll(/\x1b\[[0-9]{1,2}m/gim, "")}`
         this.client.server.emit("warn", n)
 

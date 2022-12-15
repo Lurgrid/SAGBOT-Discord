@@ -70,7 +70,7 @@ export default async (client: BotClient): Promise<void> => {
         const stats = statSync(`./dist/${path.slice(2)}`);
         const cmd = (await import(`${path}#${stats.mtimeMs}`)).default;
         try {
-            client.console.log(`The user ${interaction.user.tag} has executed the command \"${interaction.commandName}\".`)
+            client.console.log(`The user ${interaction.user.tag} has executed the '${interaction.commandName}' command on the server '${interaction.guildId}'/${interaction.guild?.name}.`)
             await cmd.run(client, interaction);
         } catch(error){
             client.console.error(`\x1b[41m\x1b[4m*** Error: An error occurred during the execution of the command '${interaction.commandName}'.\x1b[0m\n`);

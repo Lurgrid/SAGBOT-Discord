@@ -14,18 +14,17 @@ export default (client: BotClient): Server => {
         const m = (await readFileSync(join(client.path, "/stdout.log"))).toString().split("\n").filter(e => e.length != 0);
         const n = m.length;
         let i = 0;
-        while (i < 30 && m[n - 30 + i] != undefined){
-            await socket.emit("log", m[n - 30 + i]);
+        let nbl = 50
+        while (i < nbl && m[n - nbl + i] != undefined){
+            await socket.emit("log", m[n - nbl + i]);
             i++;
         }
         io.emit("consolenb", io.sockets.sockets.size);
-        if (!client.bot) return;
-        io.emit("guildnb", client.bot.guilds.cache.size);
+        if (client.bot) io.emit("guildnb", client.bot.guilds.cache.size);
+        socket.on("disconnect", () => {
+            io.emit("consolenb", io.sockets.sockets.size);
+        })
     });
-
-    io.on("disconnection", () => {
-        io.emit("consolenb", io.sockets.sockets.size);
-    })
 
     app.get("/", (req, res) => {
         res.sendFile("index.html", { root: './src/Server/' });
