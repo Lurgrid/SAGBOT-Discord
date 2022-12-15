@@ -13,8 +13,8 @@ export default (client: BotClient): Server => {
     io.on("connection", async (socket) => {
         const m = (await readFileSync(join(client.path, "/stdout.log"))).toString().split("\n").filter(e => e.length != 0);
         const n = m.length;
+        const nbl = m.length > 50 ? m.length : 50;
         let i = 0;
-        let nbl = 50
         while (i < nbl && m[n - nbl + i] != undefined){
             await socket.emit("log", m[n - nbl + i]);
             i++;
